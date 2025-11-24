@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+## FireGuard Control Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FireGuard Control is a web dashboard for monitoring an ESP32‑based fire detection system in real time using Firebase Realtime Database. It visualizes temperature, humidity, gas level, flame sensor status, and alarm state with a modern, responsive UI and light/dark themes.
 
-## Available Scripts
+### Features
 
-In the project directory, you can run:
+- Live telemetry from an ESP32 device via Firebase Realtime Database
+- Temperature, humidity, gas and flame sensor cards with status messages
+- Alarm state indicator with visual emphasis when active
+- Device connectivity panel showing online/offline and last ping time
+- History Timeline showing the most recent readings (newest first)
+- Light/dark theme toggle
+- Works well on desktop and mobile screens
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js and npm installed
+- A Firebase project with Realtime Database enabled
+- An ESP32 (or similar device) publishing readings to Firebase
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Getting Started
 
-### `npm test`
+1. Install dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+2. Configure Firebase:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   - Open `src/firebase.js`.
+   - Replace the `firebaseConfig` object with your own Firebase project credentials if needed.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Start the development server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+   The app runs by default at `http://localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Data Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The dashboard expects readings under a device path similar to:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```text
+/devices/esp32_1
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Each data object is expected to contain fields such as:
 
-## Learn More
+- `temperature` (number, °C)
+- `humidity` (number, %)
+- `gas` (number, analog value)
+- `flame` (number, e.g. `0` or `1`)
+- `alarm` (boolean)
+- `timestamp` (number, seconds since Unix epoch)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Adjust the `devicePath` constant in `src/App.js` if your database path is different.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Build for Production
 
-### Code Splitting
+To create an optimized production build:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build
+```
 
-### Analyzing the Bundle Size
+The compiled app will be output to the `build` directory.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Project Structure
 
-### Making a Progressive Web App
+- `src/App.js` – main React application and dashboard layout
+- `src/App.css` – styling for the dashboard
+- `src/firebase.js` – Firebase initialization and Realtime Database export
+- `src/index.js` – React entry point
+- `public/index.html` – HTML template
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Notes
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The alarm sound file is expected at `public/alarm.mp3`.
+- Make sure your browser allows notifications if you want to receive alarm notifications.
