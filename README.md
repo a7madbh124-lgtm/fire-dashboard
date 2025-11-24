@@ -26,10 +26,20 @@ FireGuard Control is a web dashboard for monitoring an ESP32‑based fire detect
    npm install
    ```
 
-2. Configure Firebase:
+2. Configure Firebase environment variables:
 
-   - Open `src/firebase.js`.
-   - Replace the `firebaseConfig` object with your own Firebase project credentials if needed.
+   Create a `.env` file in the project root with your Firebase credentials:
+
+   ```bash
+   REACT_APP_FIREBASE_API_KEY=your_api_key
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   REACT_APP_FIREBASE_DATABASE_URL=your_database_url
+   REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   REACT_APP_FIREBASE_APP_ID=your_app_id
+   REACT_APP_FIREBASE_MEASUREMENT_ID=your_measurement_id
+   ```
 
 3. Start the development server:
 
