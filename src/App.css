@@ -729,6 +729,10 @@ body {
   height: 285px;
 }
 
+.card-alarm-mobile {
+  display: none;
+}
+
 .app-footer {
   display: flex;
   align-items: center;
@@ -764,13 +768,31 @@ body {
   }
 
   .sidebar {
+    order: 1;
+  }
+
+  .primary-grid {
+    order: 2;
+  }
+
+  .sidebar {
     flex-direction: row;
     flex-wrap: wrap;
   }
 
   .card-device,
-  .card-history {
+  .card-history,
+  .card-alarm-mobile {
     flex: 1 1 260px;
+  }
+
+  .card-alarm-desktop {
+    display: none;
+  }
+
+  .card-alarm-mobile {
+    display: flex;
+    flex-direction: column;
   }
 }
 

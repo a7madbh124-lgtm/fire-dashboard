@@ -276,7 +276,7 @@ function App() {
               </div>
             </div>
 
-            <div className="card card-alarm">
+            <div className="card card-alarm card-alarm-desktop">
               <div className="card-header">
                 <div className="card-icon card-icon-alarm">
                   <span>🚨</span>
@@ -368,6 +368,32 @@ function App() {
                         : "--"}
                     </span>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="card card-alarm-mobile">
+              <div className="card-header">
+                <div className="card-icon card-icon-alarm">
+                  <span>🚨</span>
+                </div>
+                <div className="card-title-group">
+                  <h2>Alarm Status</h2>
+                  <p>System safety state</p>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className={`big-value alarm-value ${getAlarmClass()}`}>
+                  {getAlarmText()}
+                </div>
+                <div className="sub-text">
+                  Monitoring fire, gas, and temperature thresholds.
+                </div>
+                <div className="timestamp">
+                  Last update:{" "}
+                  {data && data.timestamp
+                    ? formatTimestamp(data.timestamp)
+                    : "--"}
                 </div>
               </div>
             </div>
