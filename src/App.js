@@ -368,6 +368,26 @@ function App() {
                         : "--"}
                     </span>
                   </div>
+                  <div className="device-pill">
+                    <span className="device-pill-label">GPS Fix</span>
+                    <span className="device-pill-value">
+                      {data && typeof data.gpsFix === "boolean"
+                        ? data.gpsFix
+                          ? "Locked"
+                          : "No fix"
+                        : "--"}
+                    </span>
+                  </div>
+                  <div className="device-pill">
+                    <span className="device-pill-label">Location</span>
+                    <span className="device-pill-value">
+                      {data &&
+                      typeof data.gpsLat === "number" &&
+                      typeof data.gpsLng === "number"
+                        ? `${data.gpsLat.toFixed(5)}, ${data.gpsLng.toFixed(5)}`
+                        : "--"}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -442,7 +462,18 @@ function App() {
                             ? "None"
                             : "--"}{" "}
                           • Alarm:{" "}
-                          {item.alarm ? "YES" : "NO"}
+                          {item.alarm ? "YES" : "NO"}{" "}
+                          • GPS:{" "}
+                          {typeof item.gpsLat === "number" &&
+                          typeof item.gpsLng === "number"
+                            ? `${item.gpsLat.toFixed(5)}, ${item.gpsLng.toFixed(5)}`
+                            : "--"}{" "}
+                          • Fix:{" "}
+                          {item.gpsFix === true
+                            ? "YES"
+                            : item.gpsFix === false
+                            ? "NO"
+                            : "--"}
                         </span>
                       </div>
                       <div className="history-meta history-time">
